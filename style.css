@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 *{
     padding: 0;
     margin: 0;
@@ -5,6 +6,7 @@
 }
 body{
     height: 100vh;
+    font-family: 'Roboto';
 }
 .container{
     padding: 30px 10px;
@@ -14,15 +16,23 @@ body{
 .container h2{
     color: white;
     font-size: 25px;
-    width: 65%;
+    width: 70%;
+}
+.search{
+    position: relative;
+}
+.search .search-icon{
+    position: absolute;
+    top:35px;
+    left: 7px;
 }
 .container input{
     width: 100%;
     background-color: #1E1E1E;
     border: none;
     outline: none;
-    padding: 15px 0;
-    padding-left: 30px;
+    padding: 17px 0;
+    padding-left: 40px;
     font-size: 16px;
     border-radius: 8px;
     color: #ffff;
