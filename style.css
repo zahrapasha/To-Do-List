@@ -83,3 +83,60 @@ body{
     height: 100%;
     border-radius: 20px;
 }
+.todays-task{
+    margin-top: 30px;
+}
+.todays-task ul li{
+    background-color: #1F1F1F;
+    display: flex;
+    border-radius: 8px;
+    height: 78px;
+    position: relative;
+}
+li .color-task{
+    width: 4%;
+    height: 100%;
+    background-color: #FACBBA;
+    border-radius: 8px 0 0 8px;
+}
+li .info-task {
+   display: flex;
+   flex-direction: column;
+   width: 90%;
+   gap: 5px;
+   margin-left: 10px;
+   align-self: center;
+}
+li .info-task .task-item{
+   color: #ffff;
+   font-size: 16px;
+   font-weight: 300;
+}
+.task-history-info{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+}
+li .info-task .task-history{
+   color: #ffff;
+   opacity: 80%;
+   font-size: 14px;
+   font-weight: 100;
+}
+.icon-calender path{
+    color: red;
+}
+.sign{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #BA83DE ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 28px;
+
+}
