@@ -140,3 +140,20 @@ li .info-task .task-history{
     top: 28px;
 
 }
+.add-task-Btn{
+    width: 60px;
+    height: 60px;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(to right , #DE83B0 ,#C59ADF);
+    box-shadow: inset 0px 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    
+}
