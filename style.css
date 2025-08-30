@@ -157,3 +157,20 @@ li .info-task .task-history{
     cursor: pointer;
     
 }
+.header{
+    margin-top: 20px;
+    position: relative;
+    padding: 10px;
+
+}
+.title-header{
+    color: #ffff;
+    font-size: 25px;
+    font-weight: 300;
+    text-align: center;
+}
+.back-home-page{
+    position: absolute;
+    /* top: 2px; */
+    cursor: pointer;
+}
