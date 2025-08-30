@@ -171,6 +171,5 @@ li .info-task .task-history{
 }
 .back-home-page{
     position: absolute;
-    /* top: 2px; */
     cursor: pointer;
 }
