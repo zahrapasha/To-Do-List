@@ -213,8 +213,35 @@ input::placeholder , textarea::placeholder{
     display: flex;
     justify-content: space-between;
     color: #ffff;
-    opacity: 60%;
     margin-top: 40px;
     font-size: 15px;
     font-weight: bold;
+}
+.day{
+    width: 58px;
+    height: 70px;
+    line-height: 25px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 60%;
+    text-align: center;
+}
+.active{
+    border: 2px solid #BA83DE;
+    border-radius: 10px;
+    transition: 0.3s;
+    color: #BA83DE;
+    opacity: 100%;
+}
+.dayWeeks .active::after {
+    content: " ";
+    position: absolute;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #BA83DE;
+    bottom: -5px;
+    left: 40%;
 }

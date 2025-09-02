@@ -31,19 +31,21 @@ function rangerweek() {
        let l = String(lastDay.getDate()).padStart(2 , '0') 
 
        
-        rangetime.textContent=`${f} ${firstDay.toLocaleString("en" , { month : "short"})}_ ${l}${lastDay.toLocaleString("en" , {month : "short"})}`
+        rangetime.textContent=`${f} ${firstDay.toLocaleString("en" , { month : "short"})} - ${l}${lastDay.toLocaleString("en" , {month : "short"})}`
       
 
          Days.forEach((d , idx)=>{
             let div = document.createElement('div');
+            div.className ='day'
             div.dataset.date = d.toDateString();
-            div.innerHTML=`${days[d.getDay()]}<br>${String(d.getDate()).padStart(2 , '0')}`
-
+            div.innerHTML=`${days[d.getDay()]} <br>  ${  String(d.getDate()).padStart(2 , '0')}`
             dayWeeks.appendChild(div)
+         
 
             div.addEventListener('click',()=>{
-                div.classList.add('active')
-
+               document.querySelectorAll(".day").forEach(el => el.classList.remove("active"));
+               div.classList.add('active')
+                
             })
             if (idx == 3) {
                 div.classList.add('active')
