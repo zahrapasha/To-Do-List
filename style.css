@@ -200,3 +200,21 @@ input::placeholder , textarea::placeholder{
     font-family: 'Roboto';
     opacity: 80%;
 }
+.headerDate{
+    color: #BA83DE;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+.sectiondate{
+    margin-top: 30px;
+}
+.dayWeeks{
+    display: flex;
+    justify-content: space-between;
+    color: #ffff;
+    opacity: 60%;
+    margin-top: 40px;
+    font-size: 15px;
+    font-weight: bold;
+}
