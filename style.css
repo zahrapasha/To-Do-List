@@ -9,7 +9,7 @@ body{
     font-family: 'Roboto';
 }
 .container{
-    padding: 30px 10px;
+    padding: 30px 15px;
     background-color: #020206;
     height: 100%;
 }
@@ -252,7 +252,7 @@ input::placeholder , textarea::placeholder{
 }
 .Time{
     font-size: 20px;
-    width: 48%;
+    width: 49%;
     color: #ffff;
     opacity: 70%;
 }
@@ -263,29 +263,29 @@ input::placeholder , textarea::placeholder{
     position: relative;
     height: 58px;
     border-radius: 14px;
-    overflow: hidden;
     background-color: #181818;
+    padding-left: 40px;
 
     
 }
 .set-Time input[type ="time"]{
     direction: ltr;
-    text-align: left;
     color: #ffff;
     opacity: 60%;
     font-size: 18px;
-    padding-left: 45px;
     background-color: transparent;
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
+    text-align: left;
 }
 .set-Time input[type="time"]::-webkit-calendar-picker-indicator{
     opacity: 0;
     pointer-events: none; 
 }
 .set-Time svg{
+    width: 25px;
     color: #BA83DE;
     position: absolute;
     left: 10px;
