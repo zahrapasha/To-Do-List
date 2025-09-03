@@ -330,5 +330,6 @@ input::placeholder , textarea::placeholder{
     background: linear-gradient(to right , #BA83DE ,#DE83B0);
     position: relative;
     bottom: -12px;
+    cursor: pointer;
     
 }
