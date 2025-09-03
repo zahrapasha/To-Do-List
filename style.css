@@ -245,3 +245,49 @@ input::placeholder , textarea::placeholder{
     bottom: -5px;
     left: 40%;
 }
+.section-time{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.Time{
+    font-size: 20px;
+    width: 48%;
+    color: #ffff;
+    opacity: 70%;
+}
+.Time p{
+    margin: 10px 0;
+}
+.set-Time{
+    position: relative;
+    height: 58px;
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: #181818;
+
+    
+}
+.set-Time input[type ="time"]{
+    direction: ltr;
+    text-align: left;
+    color: #ffff;
+    opacity: 60%;
+    font-size: 18px;
+    padding-left: 45px;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+.set-Time input[type="time"]::-webkit-calendar-picker-indicator{
+    opacity: 0;
+    pointer-events: none; 
+}
+.set-Time svg{
+    color: #BA83DE;
+    position: absolute;
+    left: 10px;
+    top: 15px;
+}
