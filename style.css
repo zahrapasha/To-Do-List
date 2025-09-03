@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 body{
-    height: 100vh;
+    height: auto;
     font-family: 'Roboto';
 }
 .container{
@@ -190,6 +190,7 @@ li .info-task .task-history{
     background-color: #181818;
     border: none;
     outline: none;
+    color: #ffff;
 }
 textarea{
     resize: none;
@@ -245,18 +246,20 @@ input::placeholder , textarea::placeholder{
     bottom: -5px;
     left: 40%;
 }
-.section-time{
+.section-time , .section-priorityTask .buttons{
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
 .Time{
-    font-size: 20px;
     width: 49%;
+
+}
+.Time p , .priorityTitle{
+    font-size: 20px;
+    width: 100%;
     color: #ffff;
     opacity: 70%;
-}
-.Time p{
     margin: 10px 0;
 }
 .set-Time{
@@ -265,7 +268,6 @@ input::placeholder , textarea::placeholder{
     border-radius: 14px;
     background-color: #181818;
     padding-left: 40px;
-
     
 }
 .set-Time input[type ="time"]{
@@ -290,4 +292,28 @@ input::placeholder , textarea::placeholder{
     position: absolute;
     left: 10px;
     top: 15px;
+}
+.section-priorityTask{
+    margin-top: 20px;
+}
+.buttons button{
+    width: 32%;
+    height: 40px;
+    outline: none;
+    border: 2px solid ;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #ffff;
+    font-size: 20px;
+}
+.buttons #hight{
+    border-color: #FACBBA;
+}
+.buttons #medium{
+    border-color: #D7F0FF;
+
+}
+.buttons #low{
+    border-color: #FAD9FF;
 }
