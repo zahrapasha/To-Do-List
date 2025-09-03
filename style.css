@@ -87,11 +87,12 @@ body{
 .todays-task{
     margin-top: 30px;
 }
-.todays-task ul li{
+.todays-task .tasklist li{
     background-color: #1F1F1F;
     display: flex;
     border-radius: 8px;
     height: 78px;
+    margin: 10px 0;
     position: relative;
 }
 li .color-task{
@@ -313,6 +314,8 @@ input::placeholder , textarea::placeholder{
 }
 .buttons #medium{
     border-color: #D7F0FF;
+    background-color: #D7F0FF;
+    color: #020206;
 
 }
 .buttons #low{

@@ -7,7 +7,7 @@ const dayWeeks =document.querySelector('.dayWeeks')
 
 let startdate= new Date();
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
- let q =       String(startdate.getDate()).padStart(2 , '0')
+let q =      String(startdate.getDate()).padStart(2 , '0')
 console.log(q);
 
       
@@ -45,6 +45,8 @@ function rangerweek() {
             div.addEventListener('click',()=>{
                document.querySelectorAll(".day").forEach(el => el.classList.remove("active"));
                div.classList.add('active')
+               localStorage.setItem('date' , ` ${ d.getDate()} ${days[d.getDay()]} `)
+               
                 
             })
             if (idx == 3) {
@@ -68,8 +70,126 @@ function rangerweek() {
     
     rangerweek();
 
-// section-priorityTask
+// Home page
+const addtaskBtn =document.querySelector('.add-task-Btn')
+const homepage = document.querySelector('.home-page')
+const createTaskpage = document.querySelector('.create-task-page')
 
+
+
+addtaskBtn.addEventListener('click',()=>{
+   homepage.style.display='none';
+   createTaskpage.style.display='block'
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// sectioncreateTask
+
+const nameinput =document.getElementById('name')
+const messageinput =document.getElementById('message')
+const createTaskBtn=document.getElementById('create-task-button')
 const hightBtn = document.getElementById('hight');
 const mediumBtn = document.getElementById('medium');
 const lowBtn = document.getElementById('low');
+const buttonsPriority =document.querySelectorAll('.PriorityBtn')
+
+const tasklist =document.querySelector('.tasklist')
+const colorTask =document.querySelector('.color-task')
+
+
+
+  
+localStorage.setItem('colortask' , ' #D7F0FF')
+let colorBtn ='medium';
+hightBtn.addEventListener('click',()=>{
+   buttonsPriority.forEach((btn)=>{
+      btn.style.backgroundColor='transparent'
+      btn.style.color='#ffff'
+
+   })
+    hightBtn.style.backgroundColor='#FACBBA'
+    hightBtn.style.color='black'
+    colorBtn='hight'
+    localStorage.setItem('colortask','#FACBBA')
+})
+mediumBtn.addEventListener('click',()=>{
+      buttonsPriority.forEach((btn)=>{
+      btn.style.backgroundColor='transparent'
+      btn.style.color='#ffff'
+
+   })
+
+    mediumBtn.style.backgroundColor='#D7F0FF'
+    mediumBtn.style.color='black'
+    colorBtn='medium'
+    localStorage.setItem('colortask','#D7F0FF')
+
+
+})
+lowBtn.addEventListener('click',()=>{
+      buttonsPriority.forEach((btn)=>{
+      btn.style.backgroundColor='transparent'
+      btn.style.color='#ffff'
+
+   })
+    
+    lowBtn.style.backgroundColor='#FAD9FF'
+    lowBtn.style.color='black'
+    colorBtn='Low'
+    localStorage.setItem('colortask','#FAD9FF')
+
+})
+
+createTaskBtn.addEventListener('click',()=>{
+   let name = nameinput.value;
+   let message = messageinput.value
+   createTaskpage.style.display='none';
+   homepage.style.display='block';
+  
+   console.log(localStorage.getItem('colortask'));
+   
+   let li =document.createElement('li')
+   li.innerHTML+=` <div class="sign">
+
+                   </div>
+                   <div class="color-task">
+                     
+                   </div>
+                   <div class="info-task">
+                       <p class="task-item">${name}</p>
+                       <div class="task-history-info">
+                           <svg class="icon-calender" width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path d="M5.1667 1V3.5" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M11.8333 1V3.5" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M4.3333 10.1668H11" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M4.3333 13.4998H8.49996" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M11.8333 2.24982C14.6083 2.39982 16 3.45816 16 7.37482V12.5248C16 15.9582 15.1667 17.6748 11 17.6748H6C1.83333 17.6748 1 15.9582 1 12.5248V7.37482C1 3.45816 2.39167 2.40816 5.16667 2.24982H11.8333Z" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         </svg>
+
+                         <p class="task-history">${localStorage.getItem('date')}</p>
+                      
+                       </div>
+                    </div>`
+
+   const colordiv = li.querySelector('.color-task');
+   colordiv.style.backgroundColor=localStorage.getItem('colortask')
+   
+   tasklist.appendChild(li);
+
+   
+})

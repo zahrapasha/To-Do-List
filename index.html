@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-      <div class="home-page" style="display: none;">
+      <div class="home-page" >
         <h2 class="title-header">You have got 5 tasks 
         today to complete</h2>
         <div class="search">
@@ -36,34 +36,10 @@
 
         <div class="todays-task">
             <p class="title">Today’s Task</p>
-            <ul>
-                <li>
-                   <div class="sign">
+            <ul class="tasklist">
+           
 
-                   </div>
-                   <div class="color-task">
-
-                   </div>
-                   <div class="info-task">
-                       <p class="task-item">Mobile App Research</p>
-                       <div class="task-history-info">
-                           <svg class="icon-calender" width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M5.1667 1V3.5" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M11.8333 1V3.5" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M4.3333 10.1668H11" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M4.3333 13.4998H8.49996" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M11.8333 2.24982C14.6083 2.39982 16 3.45816 16 7.37482V12.5248C16 15.9582 15.1667 17.6748 11 17.6748H6C1.83333 17.6748 1 15.9582 1 12.5248V7.37482C1 3.45816 2.39167 2.40816 5.16667 2.24982H11.8333Z" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                         </svg>
-
-                         <p class="task-history">4 Oct</p>
-                      
-                       </div>
-                    </div>
-                   
-                </li>
-                   
-
- 
+             
             </ul>
         </div>
 
@@ -75,7 +51,7 @@
 
        </button>
       </div>
-      <div class="create-task-page">
+      <div class="create-task-page" style="display: none;">
         <div class="header">
             <svg class="back-home-page" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.5 1C7.49187 1 1 7.49187 1 15.5C1 23.5081 7.49187 30 15.5 30C23.5081 30 30 23.5081 30 15.5C30 7.49187 23.5081 1 15.5 1Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -106,7 +82,7 @@
         </div>
         <div class="scedule-section">
             <p>Schedule</p>
-            <input type="text" placeholder="Name">
+            <input type="text" placeholder="Name" id="name">
             <textarea name="" id="message" rows="5" cols="50" placeholder="Description" ></textarea>
 
         </div>
@@ -135,9 +111,9 @@
         <div class="section-priorityTask">
            <p class="priorityTitle">Priority</p>
            <div class="buttons">
-             <button id="hight">High</button>
-             <button id="medium">Medium</button>
-             <button id="low">Low</button>
+             <button id="hight" class="PriorityBtn">High</button>
+             <button id="medium" class="PriorityBtn">Medium</button>
+             <button id="low" class="PriorityBtn">Low</button>
            </div>
         </div>
         <button id="create-task-button">Create Task</button>
