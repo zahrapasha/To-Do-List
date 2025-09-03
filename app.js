@@ -67,3 +67,9 @@ function rangerweek() {
 
     
     rangerweek();
+
+// section-priorityTask
+
+const hightBtn = document.getElementById('hight');
+const mediumBtn = document.getElementById('medium');
+const lowBtn = document.getElementById('low');
