@@ -27,8 +27,8 @@ function rangerweek() {
        
         firstDay = Days[0];
         lastDay = Days[6]   ;     
-       let f = String(firstDay.getDate()).padStart(2 , '0') 
-       let l = String(lastDay.getDate()).padStart(2 , '0') 
+        let f = String(firstDay.getDate()).padStart(2 , '0') 
+        let l = String(lastDay.getDate()).padStart(2 , '0') 
 
        
         rangetime.textContent=`${f} ${firstDay.toLocaleString("en" , { month : "short"})} - ${l}${lastDay.toLocaleString("en" , {month : "short"})}`
@@ -40,14 +40,25 @@ function rangerweek() {
             div.dataset.date = d.toDateString();
             div.innerHTML=`${days[d.getDay()]} <br>  ${  String(d.getDate()).padStart(2 , '0')}`
             dayWeeks.appendChild(div)
-         
+           
+           
+           
 
             div.addEventListener('click',()=>{
                document.querySelectorAll(".day").forEach(el => el.classList.remove("active"));
                div.classList.add('active')
-               localStorage.setItem('date' , ` ${ d.getDate()} ${days[d.getDay()]} `)
+               localStorage.setItem('date' , ` ${ String(d.getDate()).padStart(2 , '0')} ${days[d.getDay()]} `)
+               localStorage.setItem('day', `${d.getDate()}`)
+               // localStorage.setItem('weekday',`${days[d.getDay()]}`)
+            if (idx == 1) {
+               localStorage.setItem('tomorrow', 'yes' );
+
+            }
+            else{
+               localStorage.setItem('tomorrow', 'No' );
                
-                
+            }
+   
             })
             if (idx == 3) {
                 div.classList.add('active')
@@ -108,7 +119,7 @@ const mediumBtn = document.getElementById('medium');
 const lowBtn = document.getElementById('low');
 const buttonsPriority =document.querySelectorAll('.PriorityBtn')
 
-const tasklist =document.querySelector('.tasklist')
+const tasklist =document.querySelectorAll('.tasklist')
 const colorTask =document.querySelector('.color-task')
 
 
@@ -163,8 +174,8 @@ createTaskBtn.addEventListener('click',()=>{
   
    console.log(localStorage.getItem('colortask'));
    
-   let li =document.createElement('li')
-   li.innerHTML+=` <div class="sign">
+   let li1 =document.createElement('li')
+   li1.innerHTML+=` <div class="sign">
 
                    </div>
                    <div class="color-task">
@@ -186,10 +197,47 @@ createTaskBtn.addEventListener('click',()=>{
                        </div>
                     </div>`
 
-   const colordiv = li.querySelector('.color-task');
+   const colordiv = li1.querySelector('.color-task');
    colordiv.style.backgroundColor=localStorage.getItem('colortask')
    
-   tasklist.appendChild(li);
+   if ( new Date().getDate() == localStorage.getItem('day')) {
+       tasklist[0].appendChild(li1);
+      
+   }
+   if (localStorage.getItem('tomorrow') == 'yes') {
+      
+      let li2 = document.createElement('li');
+         li2.innerHTML+=` <div class="sign">
 
+                   </div>
+                   <div class="color-task">
+                     
+                   </div>
+                   <div class="info-task">
+                       <p class="task-item">${name}</p>
+                       <div class="task-history-info">
+                           <svg class="icon-calender" width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path d="M5.1667 1V3.5" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M11.8333 1V3.5" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M4.3333 10.1668H11" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M4.3333 13.4998H8.49996" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M11.8333 2.24982C14.6083 2.39982 16 3.45816 16 7.37482V12.5248C16 15.9582 15.1667 17.6748 11 17.6748H6C1.83333 17.6748 1 15.9582 1 12.5248V7.37482C1 3.45816 2.39167 2.40816 5.16667 2.24982H11.8333Z" stroke="white" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                         </svg>
+
+                         <p class="task-history">${localStorage.getItem('date')}</p>
+                      
+                       </div>
+                    </div>`
+
+   console.log(li2);
+   
+   tasklist[1].appendChild(li2);
+
+   const colordiv2 = li2.querySelector('.color-task');
+   colordiv2.style.backgroundColor=localStorage.getItem('colortask')
+   }
+   
    
 })
+
+
