@@ -175,7 +175,7 @@ createTaskBtn.addEventListener('click',()=>{
    console.log(localStorage.getItem('colortask'));
    
    let li1 =document.createElement('li')
-   li1.innerHTML+=` <div class="sign">
+   li1.innerHTML+=` <div id="sign" class="sign">
 
                    </div>
                    <div class="color-task">
@@ -200,14 +200,34 @@ createTaskBtn.addEventListener('click',()=>{
    const colordiv = li1.querySelector('.color-task');
    colordiv.style.backgroundColor=localStorage.getItem('colortask')
    
+   li1.addEventListener('click',(e)=>{
+    if (e.target.id == 'sign' ) {
+      e.target.classList.toggle('done')
+      if (e.target.classList.contains('done')) {
+              e.target.innerHTML=`<svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path d="M1.47485 5.00003L5.15385 8.67903L12.5249 1.32103" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+   `   
+      }else{
+
+         e.target.innerHTML=''
+      }
+    }
+    else if (e.target.nodeName =='svg') {
+      e.target.parentElement.classList.remove('done')
+      e.target.parentElement.innerHTML=''
+    }
+    
+      
+   })
    if ( new Date().getDate() == localStorage.getItem('day')) {
        tasklist[0].appendChild(li1);
-      
+    
    }
    if (localStorage.getItem('tomorrow') == 'yes') {
       
-      let li2 = document.createElement('li');
-         li2.innerHTML+=` <div class="sign">
+      let li = document.createElement('li');
+         li.innerHTML+=` <div id="sign" class="sign">
 
                    </div>
                    <div class="color-task">
@@ -229,15 +249,34 @@ createTaskBtn.addEventListener('click',()=>{
                        </div>
                     </div>`
 
-   console.log(li2);
+  
+   tasklist[1].appendChild(li);
    
-   tasklist[1].appendChild(li2);
 
-   const colordiv2 = li2.querySelector('.color-task');
+   const colordiv2 = li.querySelector('.color-task');
    colordiv2.style.backgroundColor=localStorage.getItem('colortask')
-   }
    
-   
-})
+      li.addEventListener('click',(e)=>{
+    if (e.target.id == 'sign' ) {
+      e.target.classList.toggle('done')
+      if (e.target.classList.contains('done')) {
+              e.target.innerHTML=`<svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path d="M1.47485 5.00003L5.15385 8.67903L12.5249 1.32103" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+   `   
+      }else{
 
+         e.target.innerHTML=''
+      }
+    }
+    else if (e.target.nodeName =='svg') {
+      e.target.parentElement.classList.remove('done')
+      e.target.parentElement.innerHTML=''
+    }
+    
+    createTaskBtn.style.display='none'  
+   })
+   
+}
+})
 
