@@ -360,4 +360,5 @@ input::placeholder , textarea::placeholder{
 #DeleteTask{
     background-color: #4F4F4F;
     color: #ffff;
+    margin-left: 6px;
 }

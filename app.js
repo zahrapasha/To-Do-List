@@ -256,7 +256,7 @@ createTaskBtn.addEventListener('click',()=>{
    const colordiv2 = li.querySelector('.color-task');
    colordiv2.style.backgroundColor=localStorage.getItem('colortask')
    
-      li.addEventListener('click',(e)=>{
+   li.addEventListener('click',(e)=>{
     if (e.target.id == 'sign' ) {
       e.target.classList.toggle('done')
       if (e.target.classList.contains('done')) {
@@ -273,8 +273,13 @@ createTaskBtn.addEventListener('click',()=>{
       e.target.parentElement.classList.remove('done')
       e.target.parentElement.innerHTML=''
     }
-    
-    createTaskBtn.style.display='none'  
+   //  edit Task
+    const EditAndDeleteBtn=document.querySelector('.buttons-edit-delete')
+    homepage.style.display='none'
+    createTaskpage.style.display='block'
+    EditAndDeleteBtn.style.display='block'
+    createTaskBtn.style.display='none'
+
    })
    
 }
