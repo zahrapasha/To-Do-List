@@ -87,7 +87,7 @@ body{
 .todays-task{
     margin-top: 30px;
 }
-.todays-task .tasklist li{
+ .tasklist li{
     background-color: #1F1F1F;
     display: flex;
     border-radius: 8px;
@@ -140,6 +140,7 @@ li .info-task .task-history{
     position: absolute;
     right: 10px;
     top: 28px;
+    background-color: transparent;
 
 }
 .add-task-Btn{
@@ -335,4 +336,28 @@ input::placeholder , textarea::placeholder{
     bottom: -12px;
     cursor: pointer;
     
+}
+.done{
+    background-color: #BA83DE;
+    border: 1px solid black;
+}
+.buttons-edit-delete{
+    margin-top: 30px;
+}
+.buttons-edit-delete button{
+   width: 48%;
+   height: 50px;
+   cursor: pointer; 
+   border-radius: 8px;
+   outline: none;
+   border: none;
+   font-size: 16px;
+   color: #ffff;
+}
+#editTask{
+  background: linear-gradient(to right , #BA83DE ,#DE83B0);
+}
+#DeleteTask{
+    background-color: #4F4F4F;
+    color: #ffff;
 }
