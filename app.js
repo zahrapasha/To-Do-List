@@ -10,7 +10,7 @@ let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let q =      String(startdate.getDate()).padStart(2 , '0')
 console.log(q);
 
-let Istomorrow;      
+   
 
 function rangerweek() {
     let Days = [];
@@ -47,7 +47,7 @@ function rangerweek() {
             div.addEventListener('click',()=>{
                document.querySelectorAll(".day").forEach(el => el.classList.remove("active"));
                div.classList.add('active')
-               localStorage.setItem('date' , ` ${ String(d.getDate()).padStart(2 , '0')} ${days[d.getDay()]} `)
+               localStorage.setItem('date' ,`${String(d.getDate()).padStart(2 , '0')}${days[d.getDay()]}`)
                localStorage.setItem('day', `${d.getDate()}`)
                // localStorage.setItem('weekday',`${days[d.getDay()]}`)
             if (idx == 1) {
@@ -213,11 +213,15 @@ lowBtn.addEventListener('click',()=>{
 
 })
 
+
+  
 createTaskBtn.addEventListener('click',()=>{
    let name = nameinput.value;
    let message = messageinput.value;
    let datetask =localStorage.getItem('date');
    let color =localStorage.getItem('colortask');
+   
+   
 
    createTaskpage.style.display='none';
    homepage.style.display='block';
@@ -228,7 +232,7 @@ createTaskBtn.addEventListener('click',()=>{
        tasklist[0].appendChild(li);
       
     }
-    else if (localStorage.getItem('tomorrow') == 'yes') {
+    else if (IsTommorrw[IsTommorrw.length - 1] == 'yes') {
        tasklist[1].appendChild(li);
       
     }
@@ -264,7 +268,7 @@ function createElement(name , datetask , color ) {
     const colordiv = element.querySelector('.color-task');
     colordiv.style.backgroundColor=color
 
-  return element
+   return element
 
      
 }
@@ -284,11 +288,32 @@ function saveElement(name , datetask , color , message ) {
    
 }
 window.addEventListener('load',()=>{
+  
    for (let i = 0; i < ArrayName.length; i++) {
-      createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i])
+
+        let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i])
+        let today = new Date();
+        let tomorrow =new Date(today);
+        tomorrow.setDate(tomorrow.getDate()+1);
+
+        if (Arraydatetask[i] == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
+           tasklist[0].appendChild(li)
+           console.log('u');
+           console.log(Arraydatetask[i]);
+           
+        }
+        if (Arraydatetask[i] == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
+       
+         
+           tasklist[1].appendChild(li)
+           
+        }
+   
       
-   }
-})
+      
+      
+   
+}})
 
 
-console.log(ArrayName);
+      
