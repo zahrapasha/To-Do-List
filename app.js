@@ -119,6 +119,8 @@ const mediumBtn = document.getElementById('medium');
 const lowBtn = document.getElementById('low');
 const buttonsPriority =document.querySelectorAll('.PriorityBtn')
 const CreateEditeButtons =document.querySelector('.buttons-edit-delete')
+const EditTaskBtn = document.getElementById('editTask')
+const DeleteTaskBtn = document.getElementById('DeleteTask')
 
 const tasklist =document.querySelectorAll('.tasklist')
 const colorTask =document.querySelector('.color-task')
@@ -287,6 +289,13 @@ function createElement(name , datetask , color , message , idx) {
     createTaskpage.style.display='block';
     CreateEditeButtons.style.display='block'
     createTaskBtn.style.display='none';
+   //  delete Task 
+    DeleteTaskBtn.addEventListener('click',()=>{
+       element.style.display='none';
+       homepage.style.display='block';
+       createTaskpage.style.display='none';
+       deletTask(name , datetask , color , message );
+    })
 
     showinfoElemnt(message , color , name , idx)
       
@@ -375,4 +384,26 @@ function resetButtonsColor() {
       btn.style.color='#ffff'
 
    })
+}
+
+function deletTask(name , datetask , color , message ) {
+
+   let numberName = ArrayName.indexOf(name);
+   let numberdatatask = Arraydatetask.indexOf(datetask);
+   let numberColor = ArrayColor.indexOf(color);
+   let numberMessage = ArrayMessage.indexOf(message);
+
+   ArrayName.splice(numberName , 1);
+   Arraydatetask.splice(numberdatatask , 1);
+   ArrayColor.splice(numberColor , 1);
+   ArrayMessage.splice(numberMessage , 1);
+
+
+   localStorage.setItem('arrayname' , ArrayName);
+   localStorage.setItem('arraycolor' ,ArrayColor);
+   localStorage.setItem('arraydatetask' ,Arraydatetask);
+   localStorage.setItem('arraymessage' ,ArrayMessage);
+
+
+ 
 }
