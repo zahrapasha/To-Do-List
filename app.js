@@ -44,6 +44,7 @@ function rangerweek() {
            
            
             div.addEventListener('click',()=>{
+               localStorage.setItem('idx',idx)
                document.querySelectorAll(".day").forEach(el => el.classList.remove("active"));
                div.classList.add('active')
                localStorage.setItem('date' , ` ${ String(d.getDate()).padStart(2 , '0')} ${days[d.getDay()]} `)
@@ -117,6 +118,7 @@ const hightBtn = document.getElementById('hight');
 const mediumBtn = document.getElementById('medium');
 const lowBtn = document.getElementById('low');
 const buttonsPriority =document.querySelectorAll('.PriorityBtn')
+const CreateEditeButtons =document.querySelector('.buttons-edit-delete')
 
 const tasklist =document.querySelectorAll('.tasklist')
 const colorTask =document.querySelector('.color-task')
@@ -174,22 +176,17 @@ else{
 localStorage.setItem('colortask' , ' #D7F0FF')
 let colorBtn ='medium';
 hightBtn.addEventListener('click',()=>{
-   buttonsPriority.forEach((btn)=>{
-      btn.style.backgroundColor='transparent'
-      btn.style.color='#ffff'
-
-   })
+   
+    resetButtonsColor()
+   
     hightBtn.style.backgroundColor='#FACBBA'
     hightBtn.style.color='black'
     colorBtn='hight'
     localStorage.setItem('colortask','#FACBBA')
 })
 mediumBtn.addEventListener('click',()=>{
-      buttonsPriority.forEach((btn)=>{
-      btn.style.backgroundColor='transparent'
-      btn.style.color='#ffff'
 
-   })
+    resetButtonsColor()
 
     mediumBtn.style.backgroundColor='#D7F0FF'
     mediumBtn.style.color='black'
@@ -199,11 +196,8 @@ mediumBtn.addEventListener('click',()=>{
 
 })
 lowBtn.addEventListener('click',()=>{
-      buttonsPriority.forEach((btn)=>{
-      btn.style.backgroundColor='transparent'
-      btn.style.color='#ffff'
-
-   })
+  
+   resetButtonsColor()
     
     lowBtn.style.backgroundColor='#FAD9FF'
     lowBtn.style.color='black'
@@ -217,17 +211,20 @@ lowBtn.addEventListener('click',()=>{
    let tomorrow =new Date(today);
    tomorrow.setDate(tomorrow.getDate()+1);
 
+   
 createTaskBtn.addEventListener('click',()=>{
+   let idx = localStorage.getItem('idx');
    let name = nameinput.value;
-   let message = messageinput.value;
+   let message =messageinput.value
    let datetask =localStorage.getItem('date');
    let color =localStorage.getItem('colortask');
+   
    
    
    createTaskpage.style.display='none';
    homepage.style.display='block';
 
-   let li = createElement(name , datetask , color);
+   let li = createElement(name , datetask , color , message , idx);
    
 
    if (datetask== ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
@@ -241,9 +238,10 @@ createTaskBtn.addEventListener('click',()=>{
 
    saveElement(name , datetask , color , message)
 
+
 })
 
-function createElement(name , datetask , color ) {
+function createElement(name , datetask , color , message , idx) {
 
     let element = document.createElement('li')
        element.innerHTML+=` <div id="sign" class="sign">
@@ -267,7 +265,7 @@ function createElement(name , datetask , color ) {
                       
                        </div>
                     </div>`
-      element.addEventListener('click',(e)=>{
+   element.addEventListener('click',(e)=>{
     if (e.target.id == 'sign' ) {
       e.target.classList.toggle('done')
       if (e.target.classList.contains('done')) {
@@ -284,11 +282,17 @@ function createElement(name , datetask , color ) {
       e.target.parentElement.classList.remove('done')
       e.target.parentElement.innerHTML=''
     }
-    
+   //  go to edit page
+    homepage.style.display='none';
+    createTaskpage.style.display='block';
+    CreateEditeButtons.style.display='block'
+    createTaskBtn.style.display='none';
+
+    showinfoElemnt(message , color , name , idx)
       
    })
 
-
+    
     const colordiv = element.querySelector('.color-task');
     colordiv.style.backgroundColor=color
 
@@ -298,6 +302,32 @@ function createElement(name , datetask , color ) {
 
      
 }
+
+function showinfoElemnt(message , color , name , idx) {
+
+   resetButtonsColor()
+
+   if (color == '#FAD9FF') {
+      lowBtn.style.backgroundColor='#FAD9FF'
+      lowBtn.style.color='black'
+   }
+   if (color == 'D7F0FF') {
+      mediumBtn.style.backgroundColor='#D7F0FF'
+      mediumBtn.style.color='D7F0FF'
+   }
+   if (color == '#D7F0FF') {
+      hightBtn.style.backgroundColor='#D7F0FF'
+      hightBtn.style.color='D7F0FF'
+   }
+
+   messageinput.value = message
+   nameinput.value = name
+   console.log(idx);
+ 
+   }   
+ 
+
+
 
 function saveElement(name , datetask , color , message ) {
 
@@ -313,11 +343,12 @@ function saveElement(name , datetask , color , message ) {
 
    
 }
+
 window.addEventListener('load',()=>{
   
    for (let i = 0; i < ArrayName.length; i++) {
 
-        let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i])
+        let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i])
         let today = new Date();
         let tomorrow =new Date(today);
         tomorrow.setDate(tomorrow.getDate()+1);
@@ -338,4 +369,10 @@ window.addEventListener('load',()=>{
    
 }})
       
-      
+function resetButtonsColor() {
+      buttonsPriority.forEach((btn)=>{
+      btn.style.backgroundColor='transparent'
+      btn.style.color='#ffff'
+
+   })
+}
