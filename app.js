@@ -214,28 +214,44 @@ lowBtn.addEventListener('click',()=>{
 })
 
 
-  
+   let today = new Date();
+   let tomorrow =new Date(today);
+   tomorrow.setDate(tomorrow.getDate()+1);
+
 createTaskBtn.addEventListener('click',()=>{
    let name = nameinput.value;
    let message = messageinput.value;
    let datetask =localStorage.getItem('date');
    let color =localStorage.getItem('colortask');
    
+   console.log(datetask);
+   console.log( `${ String(new Date().getDate()).padStart(2 , '0')}${days[new Date().getDay()]}`);
+   
    
 
    createTaskpage.style.display='none';
    homepage.style.display='block';
 
-   let li = createElement(name , datetask , color)
+   let li = createElement(name , datetask , color);
    
-    if (new Date().getDate() == localStorage.getItem('day')) {
-       tasklist[0].appendChild(li);
+
+   if (datetask==`${String(new Date().getDate()).padStart(2 , '0')}${days[new Date().getDay()]}`) {
+      tasklist[0].appendChild(li)
+      console.log('t');
       
-    }
-    else if (IsTommorrw[IsTommorrw.length - 1] == 'yes') {
-       tasklist[1].appendChild(li);
+   }
+   if (datetask == `${ String(tomorrow.getDate()).padStart(2 , '0')}${days[tomorrow.getDay()]}`) {
+      tasklist[1].appendChild(li)
+   }
+   //  if (new Date().getDate() == localStorage.getItem('day')) {
+   //     tasklist[0].appendChild(li);
       
-    }
+   //  }
+   //  else if (IsTommorrw[IsTommorrw.length - 1] == 'yes') {
+   //     tasklist[1].appendChild(li);
+      
+   //  }
+
    saveElement(name , datetask , color , message)
 
 })
@@ -264,9 +280,32 @@ function createElement(name , datetask , color ) {
                       
                        </div>
                     </div>`
+      element.addEventListener('click',(e)=>{
+    if (e.target.id == 'sign' ) {
+      e.target.classList.toggle('done')
+      if (e.target.classList.contains('done')) {
+              e.target.innerHTML=`<svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path d="M1.47485 5.00003L5.15385 8.67903L12.5249 1.32103" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+   `   
+      }else{
+
+         e.target.innerHTML=''
+      }
+    }
+    else if (e.target.nodeName =='svg') {
+      e.target.parentElement.classList.remove('done')
+      e.target.parentElement.innerHTML=''
+    }
+    
+      
+   })
+
 
     const colordiv = element.querySelector('.color-task');
     colordiv.style.backgroundColor=color
+
+   
 
    return element
 
@@ -297,9 +336,7 @@ window.addEventListener('load',()=>{
         tomorrow.setDate(tomorrow.getDate()+1);
 
         if (Arraydatetask[i] == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
-           tasklist[0].appendChild(li)
-           console.log('u');
-           console.log(Arraydatetask[i]);
+           tasklist[0].appendChild(li);
            
         }
         if (Arraydatetask[i] == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
