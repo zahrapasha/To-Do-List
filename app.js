@@ -121,6 +121,8 @@ const buttonsPriority =document.querySelectorAll('.PriorityBtn')
 const CreateEditeButtons =document.querySelector('.buttons-edit-delete')
 const EditTaskBtn = document.getElementById('editTask')
 const DeleteTaskBtn = document.getElementById('DeleteTask')
+const satarttimeinput = document.getElementById('satarttime')
+const endtimeinput = document.getElementById('endtime')
 
 const tasklist =document.querySelectorAll('.tasklist')
 const colorTask =document.querySelector('.color-task')
@@ -165,7 +167,26 @@ else{
    ArrayMessage = localStorage.getItem('arraymessage').split(',')
 }
 
+// ..............
 
+if (!localStorage.getItem('arrayStarttime')) {
+   ArrayStartTime=[];
+   
+}
+else{
+   ArrayStartTime = localStorage.getItem('arrayStarttime').split(',')
+  
+}
+// .............
+
+if (!localStorage.getItem('arrayEndTime')) {
+   ArrayEndTime=[];
+   
+}
+else{
+   ArrayEndTime = localStorage.getItem('arrayEndTime').split(',')
+  
+}
 
 
 
@@ -218,18 +239,23 @@ createTaskBtn.addEventListener('click',createNewtask)
 function createNewtask() {
    
 
-   let idx = localStorage.getItem('idx');
+   // let idx = localStorage.getItem('idx');
    let name = nameinput.value;
    let message =messageinput.value
    let datetask =localStorage.getItem('date');
    let color =localStorage.getItem('colortask');
+   let startTime =satarttimeinput.value;
+   let endTime = endtimeinput.value;
+   console.log(startTime);
+   console.log(endTime);
+   
    
    
    
    createTaskpage.style.display='none';
    homepage.style.display='block';
 
-   let li = createElement(name , datetask , color , message , idx);
+   let li = createElement(name , datetask , color , message  , startTime , endTime);
    
 
    if (datetask== ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
@@ -241,12 +267,12 @@ function createNewtask() {
       tasklist[1].appendChild(li)
    }
 
-   saveElement(name , datetask , color , message)
+   saveElement(name , datetask , color , message, startTime , endTime)
 
 }
 
 
-function createElement(name , datetask , color , message , idx) {
+function createElement(name , datetask , color , message , startTime , endTime) {
 
     let element = document.createElement('li')
        element.innerHTML+=` <div id="sign" class="sign">
@@ -310,7 +336,7 @@ function createElement(name , datetask , color , message , idx) {
 
    })
    }
-    showinfoElemnt(message , color , name , idx)
+    showinfoElemnt(message , color , name , startTime , endTime)
       
    })
 
@@ -325,7 +351,7 @@ function createElement(name , datetask , color , message , idx) {
      
 }
 
-function showinfoElemnt(message , color , name , idx) {
+function showinfoElemnt(message , color , name ,startTime , endTime) {
 
    resetButtonsColor()
 
@@ -344,28 +370,34 @@ function showinfoElemnt(message , color , name , idx) {
       hightBtn.style.color='D7F0FF'
       hightBtn.style.color = 'black'
    }
-
-   messageinput.value = message
-   nameinput.value = name
-   console.log(idx);
+   
+   messageinput.value = message;
+   nameinput.value = name;
+   satarttimeinput.value =startTime;
+   endtimeinput.value = endTime;
+   // console.log(idx);
  
    }   
  
 
 
 
-function saveElement(name , datetask , color , message ) {
+function saveElement(name , datetask , color , message,startTime , endTime) {
 
    ArrayName.push(name);
    Arraydatetask.push(datetask);
    ArrayColor.push(color);
    ArrayMessage.push(message);
+   ArrayStartTime.push(startTime);
+   ArrayEndTime.push(endTime);
+
 
    localStorage.setItem('arrayname' , ArrayName);
    localStorage.setItem('arraycolor' ,ArrayColor);
    localStorage.setItem('arraydatetask' ,Arraydatetask);
    localStorage.setItem('arraymessage' ,ArrayMessage);
-
+   localStorage.setItem('arrayStarttime',ArrayStartTime);
+   localStorage.setItem('arrayEndTime',ArrayEndTime);
    
 }
 
@@ -406,7 +438,7 @@ window.addEventListener('load',loadpage)
   
    for (let i = 0; i < ArrayName.length; i++) {
 
-        let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i])
+        let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i] , ArrayStartTime[i],ArrayEndTime[i])
         let today = new Date();
         let tomorrow =new Date(today);
         tomorrow.setDate(tomorrow.getDate()+1);
@@ -426,3 +458,4 @@ window.addEventListener('load',loadpage)
       
       }
       }
+      
