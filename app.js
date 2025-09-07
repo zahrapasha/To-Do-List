@@ -10,7 +10,7 @@ let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let q =      String(startdate.getDate()).padStart(2 , '0')
 console.log(q);
 
-   
+localStorage.setItem('date',` ${String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `)   
 
 function rangerweek() {
     let Days = [];
@@ -285,6 +285,7 @@ function createElement(name , datetask , color , message , idx) {
       e.target.parentElement.innerHTML=''
     }
    //  go to edit page
+   else{
     homepage.style.display='none';
     createTaskpage.style.display='block';
     CreateEditeButtons.style.display='block'
@@ -296,12 +297,12 @@ function createElement(name , datetask , color , message , idx) {
        createTaskpage.style.display='none';
        deletTask(name , datetask , color , message );
     })
-
+   }
     showinfoElemnt(message , color , name , idx)
       
    })
 
-    
+
     const colordiv = element.querySelector('.color-task');
     colordiv.style.backgroundColor=color
 
