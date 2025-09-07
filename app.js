@@ -214,7 +214,10 @@ lowBtn.addEventListener('click',()=>{
    tomorrow.setDate(tomorrow.getDate()+1);
 
    
-createTaskBtn.addEventListener('click',()=>{
+createTaskBtn.addEventListener('click',createNewtask)
+function createNewtask() {
+   
+
    let idx = localStorage.getItem('idx');
    let name = nameinput.value;
    let message =messageinput.value
@@ -240,8 +243,8 @@ createTaskBtn.addEventListener('click',()=>{
 
    saveElement(name , datetask , color , message)
 
+}
 
-})
 
 function createElement(name , datetask , color , message , idx) {
 
@@ -284,8 +287,8 @@ function createElement(name , datetask , color , message , idx) {
       e.target.parentElement.classList.remove('done')
       e.target.parentElement.innerHTML=''
     }
-   //  go to edit page
    else{
+   //  go to edit page
     homepage.style.display='none';
     createTaskpage.style.display='block';
     CreateEditeButtons.style.display='block'
@@ -297,6 +300,15 @@ function createElement(name , datetask , color , message , idx) {
        createTaskpage.style.display='none';
        deletTask(name , datetask , color , message );
     })
+   //  editTask
+   EditTaskBtn.addEventListener('click',()=>{
+       element.style.display='none';
+       homepage.style.display='block';
+       createTaskpage.style.display='none';
+      deletTask(name , datetask , color , message );
+      createNewtask();
+
+   })
    }
     showinfoElemnt(message , color , name , idx)
       
@@ -354,30 +366,7 @@ function saveElement(name , datetask , color , message ) {
    
 }
 
-window.addEventListener('load',()=>{
-  
-   for (let i = 0; i < ArrayName.length; i++) {
 
-        let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i])
-        let today = new Date();
-        let tomorrow =new Date(today);
-        tomorrow.setDate(tomorrow.getDate()+1);
-
-        if (Arraydatetask[i] == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
-           tasklist[0].appendChild(li);
-               
-           }
-        if (Arraydatetask[i] == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
-         
-           tasklist[1].appendChild(li)
-           
-        }
-   
-      
-      
-      
-   
-}})
       
 function resetButtonsColor() {
       buttonsPriority.forEach((btn)=>{
@@ -408,3 +397,29 @@ function deletTask(name , datetask , color , message ) {
 
  
 }
+window.addEventListener('load',loadpage)
+  function loadpage() {
+   
+  
+   for (let i = 0; i < ArrayName.length; i++) {
+
+        let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i])
+        let today = new Date();
+        let tomorrow =new Date(today);
+        tomorrow.setDate(tomorrow.getDate()+1);
+
+        if (Arraydatetask[i] == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
+           tasklist[0].appendChild(li);
+               
+           }
+        if (Arraydatetask[i] == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
+         
+           tasklist[1].appendChild(li)
+           
+        }
+   
+      
+      
+      
+      }
+      }
