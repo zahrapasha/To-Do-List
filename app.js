@@ -302,11 +302,11 @@ function createElement(name , datetask , color , message , idx) {
     })
    //  editTask
    EditTaskBtn.addEventListener('click',()=>{
+       deletTask(name , datetask , color , message );
        element.style.display='none';
        homepage.style.display='block';
        createTaskpage.style.display='none';
-      deletTask(name , datetask , color , message );
-      createNewtask();
+       createNewtask();
 
    })
    }
@@ -332,14 +332,17 @@ function showinfoElemnt(message , color , name , idx) {
    if (color == '#FAD9FF') {
       lowBtn.style.backgroundColor='#FAD9FF'
       lowBtn.style.color='black'
-   }
-   if (color == 'D7F0FF') {
-      mediumBtn.style.backgroundColor='#D7F0FF'
-      mediumBtn.style.color='D7F0FF'
+      lowBtn.style.color = 'black'
    }
    if (color == '#D7F0FF') {
-      hightBtn.style.backgroundColor='#D7F0FF'
+      mediumBtn.style.backgroundColor='#D7F0FF'
+      mediumBtn.style.color='D7F0FF'
+      mediumBtn.style.color = 'black'
+   }
+   if (color == '#FACBBA') {
+      hightBtn.style.backgroundColor='#FACBBA'
       hightBtn.style.color='D7F0FF'
+      hightBtn.style.color = 'black'
    }
 
    messageinput.value = message
