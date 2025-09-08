@@ -362,3 +362,13 @@ input::placeholder , textarea::placeholder{
     color: #ffff;
     margin-left: 6px;
 }
+.header-tasklist{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-tasklist .seeAll_task{
+    color: #BA83DE;
+    cursor: pointer;
+    opacity: 80%;
+}
