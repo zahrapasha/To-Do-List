@@ -462,5 +462,6 @@ window.addEventListener('load',loadpage)
       
       }
       }
+      localStorage.clear();
    
       
