@@ -324,11 +324,11 @@ function createElement(name , datetask , color , message , startTime , endTime) 
        element.style.display='none';
        homepage.style.display='block';
        createTaskpage.style.display='none';
-       deletTask(name , datetask , color , message );
+       deletTask(name , datetask , color , message , startTime , endTime);
     })
    //  editTask
    EditTaskBtn.addEventListener('click',()=>{
-       deletTask(name , datetask , color , message );
+       deletTask(name , datetask , color , message , startTime , endTime);
        element.style.display='none';
        homepage.style.display='block';
        createTaskpage.style.display='none';
@@ -411,25 +411,29 @@ function resetButtonsColor() {
    })
 }
 
-function deletTask(name , datetask , color , message ) {
+function deletTask(name , datetask , color , message , startTime , endTime) {
 
    let numberName = ArrayName.indexOf(name);
    let numberdatatask = Arraydatetask.indexOf(datetask);
    let numberColor = ArrayColor.indexOf(color);
    let numberMessage = ArrayMessage.indexOf(message);
+   let numberstarttime = ArrayStartTime.indexOf(startTime);
+   let numberendtime = ArrayEndTime.indexOf(endTime);
 
    ArrayName.splice(numberName , 1);
    Arraydatetask.splice(numberdatatask , 1);
    ArrayColor.splice(numberColor , 1);
    ArrayMessage.splice(numberMessage , 1);
+   ArrayStartTime.splice(numberstarttime , 1);
+   ArrayEndTime.splice(numberendtime , 1);
 
 
    localStorage.setItem('arrayname' , ArrayName);
    localStorage.setItem('arraycolor' ,ArrayColor);
    localStorage.setItem('arraydatetask' ,Arraydatetask);
    localStorage.setItem('arraymessage' ,ArrayMessage);
-
-
+   localStorage.setItem('arrayEndTime' , ArrayStartTime);   
+   localStorage.setItem('arrayStarttime',ArrayEndTime);
  
 }
 window.addEventListener('load',loadpage)
