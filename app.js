@@ -230,9 +230,7 @@ lowBtn.addEventListener('click',()=>{
 })
 
 
-   let today = new Date();
-   let tomorrow =new Date(today);
-   tomorrow.setDate(tomorrow.getDate()+1);
+
 
    
 createTaskBtn.addEventListener('click',createNewtask)
@@ -257,15 +255,7 @@ function createNewtask() {
 
    let li = createElement(name , datetask , color , message  , startTime , endTime);
    
-
-   if (datetask== ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
-      tasklist[0].appendChild(li)
-      console.log('t');
-      
-   }
-   if (datetask == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
-      tasklist[1].appendChild(li)
-   }
+   placeelement(datetask , li);
 
    saveElement(name , datetask , color , message, startTime , endTime)
 
@@ -440,27 +430,39 @@ window.addEventListener('load',loadpage)
   function loadpage() {
    
   
-   for (let i = 0; i < ArrayName.length; i++) {
+    for (let i = 0; i < ArrayName.length; i++) {
 
-        let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i] , ArrayStartTime[i],ArrayEndTime[i])
-        let today = new Date();
-        let tomorrow =new Date(today);
-        tomorrow.setDate(tomorrow.getDate()+1);
+         let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i] , ArrayStartTime[i],ArrayEndTime[i])
 
-        if (Arraydatetask[i] == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
-           tasklist[0].appendChild(li);
-               
-           }
-        if (Arraydatetask[i] == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
+         placeelement(Arraydatetask[i] , li)
          
-           tasklist[1].appendChild(li)
-           
-        }
-   
       
       
       
       }
       }
    
+      function placeelement(date , li) {
+         
+          let today = new Date();
+          let tomorrow =new Date(today);
+          tomorrow.setDate(tomorrow.getDate()+1);
+         
+         if (date == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
+            tasklist[0].appendChild(li);
+               return;
+            }
       
+         if (date == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
+         
+            tasklist[1].appendChild(li)
+            return;
+         }
+         else{
+            tasklist[2].appendChild(li)
+         }
+         
+        
+        
+        
+      }
