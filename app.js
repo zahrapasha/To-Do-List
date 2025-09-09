@@ -117,15 +117,17 @@ const createTaskBtn=document.getElementById('create-task-button')
 const hightBtn = document.getElementById('hight');
 const mediumBtn = document.getElementById('medium');
 const lowBtn = document.getElementById('low');
-const buttonsPriority =document.querySelectorAll('.PriorityBtn')
-const CreateEditeButtons =document.querySelector('.buttons-edit-delete')
-const EditTaskBtn = document.getElementById('editTask')
-const DeleteTaskBtn = document.getElementById('DeleteTask')
-const satarttimeinput = document.getElementById('satarttime')
-const endtimeinput = document.getElementById('endtime')
+const buttonsPriority =document.querySelectorAll('.PriorityBtn');
+const CreateEditeButtons =document.querySelector('.buttons-edit-delete');
+const EditTaskBtn = document.getElementById('editTask');
+const DeleteTaskBtn = document.getElementById('DeleteTask');
+const satarttimeinput = document.getElementById('satarttime');
+const endtimeinput = document.getElementById('endtime');
+const numberTask = document.getElementById('number-Task')
 
 const tasklist =document.querySelectorAll('.tasklist')
 const colorTask =document.querySelector('.color-task')
+let number =0
 
 
 let ArrayName ;
@@ -244,8 +246,6 @@ function createNewtask() {
    let color =localStorage.getItem('colortask');
    let startTime =satarttimeinput.value;
    let endTime = endtimeinput.value;
-   console.log(startTime);
-   console.log(endTime);
    
    
    
@@ -311,15 +311,15 @@ function createElement(name , datetask , color , message , startTime , endTime) 
     createTaskBtn.style.display='none';
    //  delete Task 
     DeleteTaskBtn.addEventListener('click',()=>{
-       element.style.display='none';
+       taskCount(element);
        homepage.style.display='block';
        createTaskpage.style.display='none';
        deletTask(name , datetask , color , message , startTime , endTime);
     })
    //  editTask
    EditTaskBtn.addEventListener('click',()=>{
+       taskCount(element);
        deletTask(name , datetask , color , message , startTime , endTime);
-       element.style.display='none';
        homepage.style.display='block';
        createTaskpage.style.display='none';
        createNewtask();
@@ -436,13 +436,13 @@ window.addEventListener('load',loadpage)
 
          placeelement(Arraydatetask[i] , li)
          
-      
+         taskCount()
       
       
       }
       }
    
-      function placeelement(date , li) {
+function placeelement(date , li) {
          
           let today = new Date();
           let tomorrow =new Date(today);
@@ -450,6 +450,8 @@ window.addEventListener('load',loadpage)
          
          if (date == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
             tasklist[0].appendChild(li);
+            numberTask.innerHTML=tasklist[0].childElementCount
+            
                return;
             }
       
@@ -466,3 +468,8 @@ window.addEventListener('load',loadpage)
         
         
       }
+function taskCount(element) {
+   element.remove()
+   numberTask .innerHTML = tasklist[0].childElementCount
+   
+}
