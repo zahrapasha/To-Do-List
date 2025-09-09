@@ -475,40 +475,42 @@ function taskCount(element) {
 
 searchinout.addEventListener('keyup',(event)=>{
     const textsearched =searchinout.value.toString().toLowerCase().trim();
-    const todaysTasks = tasklist[0].querySelectorAll('.Task');
-    const tommorroeTasks = tasklist[1].querySelectorAll('.Task');
-    const futureTasks = tasklist[2].querySelectorAll('.Task');
-
-    todaysTasks.forEach((t)=>{
-       if (t.textContent.toString().toLowerCase().trim().includes(textsearched)) {
-         
-         t.style.display= '';
+    const todaysTasks = tasklist[0].querySelectorAll('.Task .task-item');
+    const tommorroeTasks = tasklist[1].querySelectorAll('.Task .task-item');
+    const nexDays = tasklist[2].querySelectorAll('.Task .task-item');
+     
+    todaysTasks.forEach((t)=>{   
+       if (t.textContent.toLowerCase().trim().includes(textsearched)) {
+         t.parentElement.parentElement.style.display= '';
          
        }
        else{
-         t.style.display='none';
+         t.parentElement.parentElement.style.display= 'none';
+
        }
      
     })
-        tommorroeTasks.forEach((t)=>{
-       if (t.textContent.toString().toLowerCase().trim().includes(textsearched)) {
+    tommorroeTasks.forEach((t)=>{
+       if (t.textContent.toLowerCase().trim().includes(textsearched)) {
          
-         t.style.display= '';
+                  t.parentElement.parentElement.style.display= '';
+
          
        }
        else{
-         t.style.display='none';
+                t.parentElement.parentElement.style.display= 'none';
+
        }
      
     })   
-     futureTasks.forEach((t)=>{
-       if (t.textContent.toString().toLowerCase().trim().includes(textsearched)) {
-         
-         t.style.display= '';
+     nexDays.forEach((t)=>{
+       if (t.textContent.toLowerCase().trim().includes(textsearched)) {
+         t.parentElement.parentElement.style.display= '';
          
        }
        else{
-         t.style.display='none';
+        t.parentElement.parentElement.style.display= 'none';
+
        }
      
     })
