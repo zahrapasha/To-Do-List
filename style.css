@@ -19,19 +19,10 @@ body{
     font-size: 25px;
     width: 70%;
 }
-.home-page .header-homepage{
-    display: flex;
-    position: relative;
-}
 .home-page .title-header{
     color: #ffff;
     font-size: 25px;
     font-weight: 300;
-}
-.header-homepage .pencil{
-    position: absolute;
-    top: 35px;
-    left: 200px;
 }
 .search{
     position: relative;
