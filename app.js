@@ -123,7 +123,8 @@ const EditTaskBtn = document.getElementById('editTask');
 const DeleteTaskBtn = document.getElementById('DeleteTask');
 const satarttimeinput = document.getElementById('satarttime');
 const endtimeinput = document.getElementById('endtime');
-const numberTask = document.getElementById('number-Task')
+const numberTask = document.getElementById('number-Task');
+const searchinout = document.getElementById('search');
 
 const tasklist =document.querySelectorAll('.tasklist')
 const colorTask =document.querySelector('.color-task')
@@ -286,6 +287,7 @@ function createElement(name , datetask , color , message , startTime , endTime) 
                       
                        </div>
                     </div>`
+   element.classList.add('Task');
    element.addEventListener('click',(e)=>{
     if (e.target.id == 'sign' ) {
       e.target.classList.toggle('done')
@@ -370,8 +372,6 @@ function showinfoElemnt(message , color , name ,startTime , endTime) {
    }   
  
 
-
-
 function saveElement(name , datetask , color , message,startTime , endTime) {
 
    ArrayName.push(name);
@@ -390,9 +390,7 @@ function saveElement(name , datetask , color , message,startTime , endTime) {
    localStorage.setItem('arrayEndTime',ArrayEndTime);
    
 }
-
-
-      
+    
 function resetButtonsColor() {
       buttonsPriority.forEach((btn)=>{
       btn.style.backgroundColor='transparent'
@@ -436,7 +434,8 @@ window.addEventListener('load',loadpage)
 
          placeelement(Arraydatetask[i] , li)
          
-         taskCount()
+         numberTask.innerHTML = tasklist[0].childElementCount
+         
       
       
       }
@@ -470,6 +469,50 @@ function placeelement(date , li) {
       }
 function taskCount(element) {
    element.remove()
-   numberTask .innerHTML = tasklist[0].childElementCount
+   numberTask.innerHTML = tasklist[0].childElementCount
    
 }
+
+searchinout.addEventListener('keyup',(event)=>{
+    const textsearched =searchinout.value.toString().toLowerCase().trim();
+    const todaysTasks = tasklist[0].querySelectorAll('.Task');
+    const tommorroeTasks = tasklist[1].querySelectorAll('.Task');
+    const futureTasks = tasklist[2].querySelectorAll('.Task');
+
+    todaysTasks.forEach((t)=>{
+       if (t.textContent.toString().toLowerCase().trim().includes(textsearched)) {
+         
+         t.style.display= '';
+         
+       }
+       else{
+         t.style.display='none';
+       }
+     
+    })
+        tommorroeTasks.forEach((t)=>{
+       if (t.textContent.toString().toLowerCase().trim().includes(textsearched)) {
+         
+         t.style.display= '';
+         
+       }
+       else{
+         t.style.display='none';
+       }
+     
+    })   
+     futureTasks.forEach((t)=>{
+       if (t.textContent.toString().toLowerCase().trim().includes(textsearched)) {
+         
+         t.style.display= '';
+         
+       }
+       else{
+         t.style.display='none';
+       }
+     
+    })
+   
+
+}) 
+

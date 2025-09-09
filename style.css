@@ -19,6 +19,10 @@ body{
     font-size: 25px;
     width: 70%;
 }
+.home-page{
+    position: relative;
+}
+
 .home-page .title-header{
     color: #ffff;
     font-size: 25px;
@@ -188,7 +192,7 @@ li .info-task .task-history{
     margin: 10px 0;
     font-size: 22px;
     color: #ffff;
-
+    position: relative;
 }
 .scedule-section input ,textarea{
     margin: 8px 0;
