@@ -126,9 +126,14 @@ const endtimeinput = document.getElementById('endtime');
 const numberTask = document.getElementById('number-Task');
 const searchinout = document.getElementById('search');
 
-const tasklist =document.querySelectorAll('.tasklist')
-const colorTask =document.querySelector('.color-task')
-let number =0
+const tasklist =document.querySelectorAll('.tasklist');
+const CompletedtasksInfo = document.querySelector('.Completed-tasks-Info span');
+
+let child1;
+let child2;
+let child3;
+let allTasks;
+
 
 
 let ArrayName ;
@@ -249,16 +254,14 @@ function createNewtask() {
    let endTime = endtimeinput.value;
    
    
-   
-   
    createTaskpage.style.display='none';
    homepage.style.display='block';
 
    let li = createElement(name , datetask , color , message  , startTime , endTime);
    
    placeelement(datetask , li);
-
-   saveElement(name , datetask , color , message, startTime , endTime)
+   taskCount();
+   saveElement(name , datetask , color , message, startTime , endTime);
 
 }
 
@@ -313,14 +316,15 @@ function createElement(name , datetask , color , message , startTime , endTime) 
     createTaskBtn.style.display='none';
    //  delete Task 
     DeleteTaskBtn.addEventListener('click',()=>{
-       taskCount(element);
+       todaytaskCount(element);
        homepage.style.display='block';
        createTaskpage.style.display='none';
        deletTask(name , datetask , color , message , startTime , endTime);
+       taskCount();
     })
    //  editTask
    EditTaskBtn.addEventListener('click',()=>{
-       taskCount(element);
+       todaytaskCount(element);
        deletTask(name , datetask , color , message , startTime , endTime);
        homepage.style.display='block';
        createTaskpage.style.display='none';
@@ -422,6 +426,12 @@ function deletTask(name , datetask , color , message , startTime , endTime) {
    localStorage.setItem('arraymessage' ,ArrayMessage);
    localStorage.setItem('arrayEndTime' , ArrayStartTime);   
    localStorage.setItem('arrayStarttime',ArrayEndTime);
+
+   child1 =Number( localStorage.getItem('todaysTaskscounts'));
+   child2= Number(localStorage.getItem('tommorowTaskscount'));
+   child3 = Number(localStorage.getItem('nextDaysTaskscount'));
+   allTasks=child1+child2+child3;
+   CompletedtasksInfo.innerHTML=`0/${allTasks}`;
  
 }
 window.addEventListener('load',loadpage)
@@ -439,6 +449,8 @@ window.addEventListener('load',loadpage)
       
       
       }
+     taskCount();
+      
       }
    
 function placeelement(date , li) {
@@ -450,26 +462,33 @@ function placeelement(date , li) {
          if (date == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
             tasklist[0].appendChild(li);
             numberTask.innerHTML=tasklist[0].childElementCount
-            
-               return;
+            localStorage.setItem('todaysTaskscounts',tasklist[0].childElementCount)
+               // return;
             }
       
-         if (date == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
+         else if (date == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
          
             tasklist[1].appendChild(li)
-            return;
+            localStorage.setItem('tommorowTaskscount',tasklist[1].childElementCount)
+
+            // return;
          }
          else{
             tasklist[2].appendChild(li)
+            localStorage.setItem('nextDaysTaskscount',tasklist[2].childElementCount)
+            
          }
          
+       
         
         
         
       }
-function taskCount(element) {
+function todaytaskCount(element) {
    element.remove()
    numberTask.innerHTML = tasklist[0].childElementCount
+ 
+
    
 }
 
@@ -517,4 +536,21 @@ searchinout.addEventListener('keyup',(event)=>{
    
 
 }) 
+
+function taskCount() {
+   localStorage.setItem('todaysTaskscounts',tasklist[0].childElementCount);
+   localStorage.setItem('tommorowTaskscount',tasklist[1].childElementCount);
+   localStorage.setItem('nextDaysTaskscount',tasklist[2].childElementCount);
+
+   child1 =Number( localStorage.getItem('todaysTaskscounts'));
+   child2= Number(localStorage.getItem('tommorowTaskscount'));
+   child3 = Number(localStorage.getItem('nextDaysTaskscount'));
+   allTasks=child1+child2+child3;
+   CompletedtasksInfo.innerHTML=`0/${allTasks}`;
+}
+
+
+
+
+
 
