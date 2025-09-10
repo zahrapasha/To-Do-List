@@ -85,8 +85,10 @@ function rangerweek() {
 const addtaskBtn =document.querySelector('.add-task-Btn')
 const homepage = document.querySelector('.home-page')
 const createTaskpage = document.querySelector('.create-task-page')
-
-
+const sectionstatefirstChild = document.querySelector('.section-state').firstElementChild;
+const sectionstatelastChild = document.querySelector('.section-state').lastElementChild;
+const stateinfo = document.querySelector('.stateinfo');
+const presentbar = document.querySelector('.present-bar')
 
 addtaskBtn.addEventListener('click',()=>{
    homepage.style.display='none';
@@ -140,6 +142,7 @@ let ArrayName ;
 let ArrayColor;
 let Arraydatetask;
 let ArrayMessage;
+let ArrayDoneTasks;
   
 if (!localStorage.getItem('arrayname')) {
    ArrayName=[];
@@ -195,7 +198,15 @@ else{
    ArrayEndTime = localStorage.getItem('arrayEndTime').split(',')
   
 }
-
+// ..............
+if (!localStorage.getItem('arrayDoneTasks')) {
+   ArrayDoneTasks=[];
+   
+}
+else{
+   ArrayDoneTasks = localStorage.getItem('arrayDoneTasks').split(',')
+  
+}
 
 
 
@@ -290,10 +301,10 @@ function createElement(name , datetask , color , message , startTime , endTime) 
                       
                        </div>
                     </div>`
-   element.classList.add('Task');
-   element.addEventListener('click',(e)=>{
-   console.log(e.target.id);
-   console.log(e.target.nodeName);
+      element.classList.add('Task');
+      element.addEventListener('click',(e)=>{
+      console.log(e.target.id);
+      console.log(e.target.nodeName);
    
       
     if (e.target.id == 'sign' ) {
@@ -314,7 +325,7 @@ function createElement(name , datetask , color , message , startTime , endTime) 
          doneTask--;
          taskCount();
          Percentagecalculate();
-
+         
       }
     }
     else if (e.target.nodeName =='svg' || e.target.nodeName == 'path') {
@@ -574,9 +585,13 @@ function taskCount() {
 
 }
 function Percentagecalculate() {
-   let percentage = Number(doneTask)/Number(allTasks)*100
-   
-   
+   let percentage =Math.floor( Number(doneTask)/Number(allTasks)*100)
+   sectionstatelastChild.textContent=`${percentage}%`;
+   presentbar.style.width=`${percentage}%`;
+    if (Math.floor( Number(doneTask)/Number(allTasks)*100 >= 33)) {
+      stateinfo.style.display='block'
+      stateinfo.textContent='You are almost done go ahead';
+   }
 }
 
 
