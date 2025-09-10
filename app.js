@@ -133,7 +133,7 @@ let child1;
 let child2;
 let child3;
 let allTasks;
-
+let doneTask=0
 
 
 let ArrayName ;
@@ -292,6 +292,10 @@ function createElement(name , datetask , color , message , startTime , endTime) 
                     </div>`
    element.classList.add('Task');
    element.addEventListener('click',(e)=>{
+   console.log(e.target.id);
+   console.log(e.target.nodeName);
+   
+      
     if (e.target.id == 'sign' ) {
       e.target.classList.toggle('done')
       if (e.target.classList.contains('done')) {
@@ -299,14 +303,30 @@ function createElement(name , datetask , color , message , startTime , endTime) 
          <path d="M1.47485 5.00003L5.15385 8.67903L12.5249 1.32103" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
          </svg>
    `   
-      }else{
-
-         e.target.innerHTML=''
+        doneTask++;
+        taskCount();
+        console.log(doneTask);
+        
+      }
+      else{
+         e.target.innerHTML='';
+         doneTask--;
+         taskCount();
       }
     }
-    else if (e.target.nodeName =='svg') {
-      e.target.parentElement.classList.remove('done')
-      e.target.parentElement.innerHTML=''
+    else if (e.target.nodeName =='svg' || e.target.nodeName == 'path') {
+      if (e.target.nodeName =='svg') {
+           e.target.parentElement.classList.remove('done')
+           e.target.parentElement.innerHTML=''
+      }
+      else{
+           e.target.parentElement.parentElement.classList.remove('done')
+           e.target.parentElement.parentElement.innerHTML=''
+      }
+         doneTask--;
+         taskCount();
+         e.target.innerHTML='';
+    
     }
    else{
    //  go to edit page
@@ -375,7 +395,6 @@ function showinfoElemnt(message , color , name ,startTime , endTime) {
  
    }   
  
-
 function saveElement(name , datetask , color , message,startTime , endTime) {
 
    ArrayName.push(name);
@@ -546,7 +565,7 @@ function taskCount() {
    child2= Number(localStorage.getItem('tommorowTaskscount'));
    child3 = Number(localStorage.getItem('nextDaysTaskscount'));
    allTasks=child1+child2+child3;
-   CompletedtasksInfo.innerHTML=`0/${allTasks}`;
+   CompletedtasksInfo.innerHTML=`${doneTask}/${allTasks}`;
 }
 
 
