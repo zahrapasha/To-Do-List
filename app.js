@@ -305,13 +305,16 @@ function createElement(name , datetask , color , message , startTime , endTime) 
    `   
         doneTask++;
         taskCount();
-        console.log(doneTask);
+        Percentagecalculate();
+
         
       }
       else{
          e.target.innerHTML='';
          doneTask--;
          taskCount();
+         Percentagecalculate();
+
       }
     }
     else if (e.target.nodeName =='svg' || e.target.nodeName == 'path') {
@@ -325,6 +328,7 @@ function createElement(name , datetask , color , message , startTime , endTime) 
       }
          doneTask--;
          taskCount();
+         Percentagecalculate();
          e.target.innerHTML='';
     
     }
@@ -566,6 +570,13 @@ function taskCount() {
    child3 = Number(localStorage.getItem('nextDaysTaskscount'));
    allTasks=child1+child2+child3;
    CompletedtasksInfo.innerHTML=`${doneTask}/${allTasks}`;
+
+
+}
+function Percentagecalculate() {
+   let percentage = Number(doneTask)/Number(allTasks)*100
+   
+   
 }
 
 
