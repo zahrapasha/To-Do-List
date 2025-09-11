@@ -322,40 +322,41 @@ function createElement(name , datetask , color , message , startTime , endTime ,
       e.target.classList.toggle('done')
         savedStatus[id] = circle.classList.contains("done");
         localStorage.setItem("doneTasks", JSON.stringify(savedStatus));
+        taskCount();
+
       if (e.target.classList.contains('done')) {
               e.target.innerHTML=`<svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path d="M1.47485 5.00003L5.15385 8.67903L12.5249 1.32103" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
          </svg>
    `   
-        doneTask++;
-        taskCount();
         Percentagecalculate();
 
         
       }
       else{
          e.target.innerHTML='';
-         doneTask--;
-         taskCount();
          Percentagecalculate();
          
       }
     }
     else if (e.target.nodeName =='svg' || e.target.nodeName == 'path') {
+           taskCount();
+
       if (e.target.nodeName =='svg') {
            e.target.parentElement.classList.remove('done')
            e.target.parentElement.innerHTML=''
-
+         //   taskCount();
+           
       }
       else{
            e.target.parentElement.parentElement.classList.remove('done')
            e.target.parentElement.parentElement.innerHTML=''
-
+         //   taskCount();
+           
       
 
 
       }
-         doneTask--;
          taskCount();
          Percentagecalculate();
          e.target.innerHTML='';
@@ -388,13 +389,14 @@ function createElement(name , datetask , color , message , startTime , endTime ,
    })
    }
     showinfoElemnt(message , color , name , startTime , endTime)
+    taskCount();
       
    })
 
 
     const colordiv = element.querySelector('.color-task');
     colordiv.style.backgroundColor=color
-
+    
    
 
    return element
@@ -604,7 +606,14 @@ function taskCount() {
    child2= Number(localStorage.getItem('tommorowTaskscount'));
    child3 = Number(localStorage.getItem('nextDaysTaskscount'));
    allTasks=child1+child2+child3;
-   CompletedtasksInfo.innerHTML=`${doneTask}/${allTasks}`;
+
+   let count = 0;
+   for(let Key in savedStatus ){
+      if (savedStatus[Key] === true) {
+         count++
+      }
+   }
+   CompletedtasksInfo.innerHTML=`${count}/${allTasks}`;
 
 
 }
