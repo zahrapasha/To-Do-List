@@ -199,14 +199,15 @@ else{
   
 }
 // ..............
-if (!localStorage.getItem('arrayDoneTasks')) {
-   ArrayDoneTasks=[];
+if (!localStorage.getItem('arrayid')) {
+   ArrayId=[];
    
 }
 else{
-   ArrayDoneTasks = localStorage.getItem('arrayDoneTasks').split(',')
+   ArrayId = localStorage.getItem('arrayid').split(',')
   
 }
+
 
 
 
@@ -257,6 +258,7 @@ function createNewtask() {
    
 
    // let idx = localStorage.getItem('idx');
+   id = new Date();
    let name = nameinput.value;
    let message =messageinput.value
    let datetask =localStorage.getItem('date');
@@ -268,17 +270,17 @@ function createNewtask() {
    createTaskpage.style.display='none';
    homepage.style.display='block';
 
-   let li = createElement(name , datetask , color , message  , startTime , endTime);
-   
+   let li = createElement(name , datetask , color , message  , startTime , endTime ,id);
+
    placeelement(datetask , li);
    taskCount();
-   saveElement(name , datetask , color , message, startTime , endTime);
+   saveElement(name , datetask , color , message, startTime , endTime ,id);
 
 }
 
+  let savedStatus = JSON.parse(localStorage.getItem("doneTasks")) || {};
 
-function createElement(name , datetask , color , message , startTime , endTime) {
-
+function createElement(name , datetask , color , message , startTime , endTime ,id) {
     let element = document.createElement('li')
        element.innerHTML+=` <div id="sign" class="sign">
 
@@ -301,14 +303,25 @@ function createElement(name , datetask , color , message , startTime , endTime) 
                       
                        </div>
                     </div>`
-      element.classList.add('Task');
-      element.addEventListener('click',(e)=>{
-      console.log(e.target.id);
-      console.log(e.target.nodeName);
-   
-      
+    element.classList.add('Task');
+    let circle = element.querySelector(".sign");
+    element.setAttribute("data-id" , id);
+
+    // اگر قبلا تکمیل شده بود، رنگ بده
+    if (savedStatus[id]) {
+       circle.classList.add("done");
+       circle.innerHTML=`<svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path d="M1.47485 5.00003L5.15385 8.67903L12.5249 1.32103" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+   ` 
+    }
+
+    element.addEventListener('click',(e)=>{
+         
     if (e.target.id == 'sign' ) {
       e.target.classList.toggle('done')
+        savedStatus[id] = circle.classList.contains("done");
+        localStorage.setItem("doneTasks", JSON.stringify(savedStatus));
       if (e.target.classList.contains('done')) {
               e.target.innerHTML=`<svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path d="M1.47485 5.00003L5.15385 8.67903L12.5249 1.32103" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -332,16 +345,23 @@ function createElement(name , datetask , color , message , startTime , endTime) 
       if (e.target.nodeName =='svg') {
            e.target.parentElement.classList.remove('done')
            e.target.parentElement.innerHTML=''
+
       }
       else{
            e.target.parentElement.parentElement.classList.remove('done')
            e.target.parentElement.parentElement.innerHTML=''
+
+      
+
+
       }
          doneTask--;
          taskCount();
          Percentagecalculate();
          e.target.innerHTML='';
-    
+         e.target.classList.toggle('done');
+           savedStatus[id] = circle.classList.contains("done");
+           localStorage.setItem("doneTasks", JSON.stringify(savedStatus));
     }
    else{
    //  go to edit page
@@ -354,13 +374,13 @@ function createElement(name , datetask , color , message , startTime , endTime) 
        todaytaskCount(element);
        homepage.style.display='block';
        createTaskpage.style.display='none';
-       deletTask(name , datetask , color , message , startTime , endTime);
+       deletTask(name , datetask , color , message , startTime , endTime ,id);
        taskCount();
     })
    //  editTask
    EditTaskBtn.addEventListener('click',()=>{
        todaytaskCount(element);
-       deletTask(name , datetask , color , message , startTime , endTime);
+       deletTask(name , datetask , color , message , startTime , endTime ,id);
        homepage.style.display='block';
        createTaskpage.style.display='none';
        createNewtask();
@@ -410,7 +430,7 @@ function showinfoElemnt(message , color , name ,startTime , endTime) {
  
    }   
  
-function saveElement(name , datetask , color , message,startTime , endTime) {
+function saveElement(name , datetask , color , message,startTime , endTime , id) {
 
    ArrayName.push(name);
    Arraydatetask.push(datetask);
@@ -418,7 +438,7 @@ function saveElement(name , datetask , color , message,startTime , endTime) {
    ArrayMessage.push(message);
    ArrayStartTime.push(startTime);
    ArrayEndTime.push(endTime);
-
+   ArrayId.push(id);
 
    localStorage.setItem('arrayname' , ArrayName);
    localStorage.setItem('arraycolor' ,ArrayColor);
@@ -426,7 +446,7 @@ function saveElement(name , datetask , color , message,startTime , endTime) {
    localStorage.setItem('arraymessage' ,ArrayMessage);
    localStorage.setItem('arrayStarttime',ArrayStartTime);
    localStorage.setItem('arrayEndTime',ArrayEndTime);
-   
+   localStorage.setItem('arrayid',ArrayId);
 }
     
 function resetButtonsColor() {
@@ -437,7 +457,7 @@ function resetButtonsColor() {
    })
 }
 
-function deletTask(name , datetask , color , message , startTime , endTime) {
+function deletTask(name , datetask , color , message , startTime , endTime ,id) {
 
    let numberName = ArrayName.indexOf(name);
    let numberdatatask = Arraydatetask.indexOf(datetask);
@@ -445,6 +465,7 @@ function deletTask(name , datetask , color , message , startTime , endTime) {
    let numberMessage = ArrayMessage.indexOf(message);
    let numberstarttime = ArrayStartTime.indexOf(startTime);
    let numberendtime = ArrayEndTime.indexOf(endTime);
+   let numberid = ArrayId.indexOf(id);
 
    ArrayName.splice(numberName , 1);
    Arraydatetask.splice(numberdatatask , 1);
@@ -452,7 +473,7 @@ function deletTask(name , datetask , color , message , startTime , endTime) {
    ArrayMessage.splice(numberMessage , 1);
    ArrayStartTime.splice(numberstarttime , 1);
    ArrayEndTime.splice(numberendtime , 1);
-
+   ArrayId.splice(numberid,1);
 
    localStorage.setItem('arrayname' , ArrayName);
    localStorage.setItem('arraycolor' ,ArrayColor);
@@ -460,6 +481,9 @@ function deletTask(name , datetask , color , message , startTime , endTime) {
    localStorage.setItem('arraymessage' ,ArrayMessage);
    localStorage.setItem('arrayEndTime' , ArrayStartTime);   
    localStorage.setItem('arrayStarttime',ArrayEndTime);
+   localStorage.setItem('arrayid',ArrayId);
+
+
 
    child1 =Number( localStorage.getItem('todaysTaskscounts'));
    child2= Number(localStorage.getItem('tommorowTaskscount'));
@@ -474,7 +498,7 @@ window.addEventListener('load',loadpage)
   
     for (let i = 0; i < ArrayName.length; i++) {
 
-         let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i] , ArrayStartTime[i],ArrayEndTime[i])
+         let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i] , ArrayStartTime[i],ArrayEndTime[i] , ArrayId[i])
 
          placeelement(Arraydatetask[i] , li)
          
@@ -593,7 +617,7 @@ function Percentagecalculate() {
       stateinfo.textContent='You are almost done go ahead';
    }
 }
-
+console.log(ArrayId[ArrayId.length-1]);
 
 
 
