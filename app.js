@@ -134,8 +134,8 @@ const CompletedtasksInfo = document.querySelector('.Completed-tasks-Info span');
 let child1;
 let child2;
 let child3;
-let allTasks;
-let doneTask=0
+let allTasks=0;
+let doneTask=0;
 
 
 let ArrayName ;
@@ -317,7 +317,6 @@ function createElement(name , datetask , color , message , startTime , endTime ,
     }
 
     element.addEventListener('click',(e)=>{
-         
     if (e.target.id == 'sign' ) {
       e.target.classList.toggle('done')
         savedStatus[id] = circle.classList.contains("done");
@@ -329,13 +328,11 @@ function createElement(name , datetask , color , message , startTime , endTime ,
          <path d="M1.47485 5.00003L5.15385 8.67903L12.5249 1.32103" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
          </svg>
    `   
-        Percentagecalculate();
-
         
       }
       else{
          e.target.innerHTML='';
-         Percentagecalculate();
+         
          
       }
     }
@@ -358,7 +355,6 @@ function createElement(name , datetask , color , message , startTime , endTime ,
 
       }
          taskCount();
-         Percentagecalculate();
          e.target.innerHTML='';
          e.target.classList.toggle('done');
            savedStatus[id] = circle.classList.contains("done");
@@ -597,6 +593,10 @@ searchinout.addEventListener('keyup',(event)=>{
 
 }) 
 
+   let count = 0;
+
+
+
 function taskCount() {
    localStorage.setItem('todaysTaskscounts',tasklist[0].childElementCount);
    localStorage.setItem('tommorowTaskscount',tasklist[1].childElementCount);
@@ -606,29 +606,29 @@ function taskCount() {
    child2= Number(localStorage.getItem('tommorowTaskscount'));
    child3 = Number(localStorage.getItem('nextDaysTaskscount'));
    allTasks=child1+child2+child3;
-
-   let count = 0;
+   stateinfo.textContent='';
+   
+   count = 0;
    for(let Key in savedStatus ){
       if (savedStatus[Key] === true) {
          count++
       }
    }
    CompletedtasksInfo.innerHTML=`${count}/${allTasks}`;
-
-
+   Percentagecalculate(count , allTasks)
 }
-function Percentagecalculate() {
-   let percentage =Math.floor( Number(doneTask)/Number(allTasks)*100)
+function Percentagecalculate(count , allTasks) {
+   let percentage =Math.floor( Number(count)/Number(allTasks)*100)
    sectionstatelastChild.textContent=`${percentage}%`;
    presentbar.style.width=`${percentage}%`;
-    if (Math.floor( Number(doneTask)/Number(allTasks)*100 >= 33)) {
+    if (Math.floor( Number(count)/Number(allTasks)*100 >= 33)) {
       stateinfo.style.display='block'
       stateinfo.textContent='You are almost done go ahead';
    }
+    if (allTasks == 0) {
+   sectionstatelastChild.textContent='0%';
+      
+   }
 }
-console.log(ArrayId[ArrayId.length-1]);
 
-
-
-
-
+  
