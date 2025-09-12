@@ -372,6 +372,8 @@ function createElement(name , datetask , color , message , startTime , endTime ,
        homepage.style.display='block';
        createTaskpage.style.display='none';
        deletTask(name , datetask , color , message , startTime , endTime ,id);
+       console.log('f');
+       
        taskCount();
     })
    //  editTask
@@ -488,10 +490,18 @@ function deletTask(name , datetask , color , message , startTime , endTime ,id) 
    child3 = Number(localStorage.getItem('nextDaysTaskscount'));
    allTasks=child1+child2+child3;
    
-   let savedStatus = JSON.parse(localStorage.getItem("doneTasks")) || {};
+   if (savedStatus[id]) {
+      count--
+      console.log(count);
+      
+   }
+   savedStatus = JSON.parse(localStorage.getItem("doneTasks")) || {};
    delete savedStatus[id];
    localStorage.setItem("doneTasks", JSON.stringify(savedStatus));
+  
+   
 
+   
 }
 window.addEventListener('load',loadpage)
   function loadpage() {
