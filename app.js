@@ -487,8 +487,11 @@ function deletTask(name , datetask , color , message , startTime , endTime ,id) 
    child2= Number(localStorage.getItem('tommorowTaskscount'));
    child3 = Number(localStorage.getItem('nextDaysTaskscount'));
    allTasks=child1+child2+child3;
-   CompletedtasksInfo.innerHTML=`0/${allTasks}`;
- 
+   
+   let savedStatus = JSON.parse(localStorage.getItem("doneTasks")) || {};
+   delete savedStatus[id];
+   localStorage.setItem("doneTasks", JSON.stringify(savedStatus));
+
 }
 window.addEventListener('load',loadpage)
   function loadpage() {
@@ -598,6 +601,8 @@ searchinout.addEventListener('keyup',(event)=>{
 
 
 function taskCount() {
+   count = 0;
+   allTasks = 0;
    localStorage.setItem('todaysTaskscounts',tasklist[0].childElementCount);
    localStorage.setItem('tommorowTaskscount',tasklist[1].childElementCount);
    localStorage.setItem('nextDaysTaskscount',tasklist[2].childElementCount);
@@ -607,8 +612,12 @@ function taskCount() {
    child3 = Number(localStorage.getItem('nextDaysTaskscount'));
    allTasks=child1+child2+child3;
    stateinfo.textContent='';
+   presentbar.style.width='0%';
    
-   count = 0;
+  
+
+   
+   
    for(let Key in savedStatus ){
       if (savedStatus[Key] === true) {
          count++
@@ -627,8 +636,9 @@ function Percentagecalculate(count , allTasks) {
    }
     if (allTasks == 0) {
    sectionstatelastChild.textContent='0%';
+  
       
    }
+    console.log(allTasks);
+    console.log(count);
 }
-
-  
