@@ -216,14 +216,13 @@ else{
 
 
 localStorage.setItem('colortask' , ' #D7F0FF')
-// let colorBtn ='medium';
+
 hightBtn.addEventListener('click',()=>{
    
     resetButtonsColor()
    
     hightBtn.style.backgroundColor='#FACBBA'
     hightBtn.style.color='black'
-   //  colorBtn='hight'
     localStorage.setItem('colortask','#FACBBA')
 })
 mediumBtn.addEventListener('click',()=>{
@@ -232,7 +231,6 @@ mediumBtn.addEventListener('click',()=>{
 
     mediumBtn.style.backgroundColor='#D7F0FF'
     mediumBtn.style.color='black'
-   //  colorBtn='medium'
     localStorage.setItem('colortask','#D7F0FF')
 
 
@@ -243,7 +241,6 @@ lowBtn.addEventListener('click',()=>{
     
     lowBtn.style.backgroundColor='#FAD9FF'
     lowBtn.style.color='black'
-   //  colorBtn='Low'
     localStorage.setItem('colortask','#FAD9FF')
 
 })
@@ -256,7 +253,7 @@ let savedStatus = JSON.parse(localStorage.getItem("doneTasks")) || {};
 createTaskBtn.addEventListener('click',createNewtask)
 function createNewtask() {
    
-   // let idx = localStorage.getItem('idx');
+
    id = new Date();
    let name = nameinput.value;
    let message =messageinput.value
