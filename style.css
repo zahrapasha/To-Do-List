@@ -108,6 +108,38 @@ body{
     max-height: 150px;
     overflow-y: auto;
 }
+.tasklist {
+  overflow-y: auto; /* حتما بذار فعال باشه */
+}
+
+/* کل اسکرول‌بار */
+.tasklist::-webkit-scrollbar {
+  width: 8px;              /* باریکی اسکرول‌بار */
+}
+
+/* بک‌گراند اسکرول‌بار */
+.tasklist::-webkit-scrollbar-track {
+  background: #121212;      /* رنگ پس‌زمینه مشکی تیره */
+  border-radius: 10px;
+}
+
+/* خود دسته‌ی اسکرول */
+.tasklist::-webkit-scrollbar-thumb {
+  background-color: #C59ADF; /* بنفش گرادینتی */
+  border-radius: 10px;
+  opacity: 40%;
+}
+
+/* وقتی موس روش میره */
+.tasklist::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #c084fc, #e879f9);
+}
+
+/* برای فایرفاکس */
+.tasklist {
+  scrollbar-width: thin; 
+  scrollbar-color: #BA83DE #121212;
+}
  .tasklist li{
     background-color: #1F1F1F;
     display: flex;

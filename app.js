@@ -99,7 +99,7 @@ addtaskBtn.addEventListener('click',()=>{
     nameinput.value='';
     messageinput.value='';
     startTime.value='';
-    endTime.value='';
+    endTime.valueupdate='';
    
 })
 
