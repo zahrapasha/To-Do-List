@@ -90,18 +90,7 @@ const sectionstatelastChild = document.querySelector('.section-state').lastEleme
 const stateinfo = document.querySelector('.stateinfo');
 const presentbar = document.querySelector('.present-bar')
 
-addtaskBtn.addEventListener('click',()=>{
-    homepage.style.display='none';
-    createTaskpage.style.display='block';
-    createTaskpage.style.display='block';
-    CreateEditeButtons.style.display='none'
-    createTaskBtn.style.display='block';
-    nameinput.value='';
-    messageinput.value='';
-    startTime.value='';
-    endTime.valueupdate='';
-   
-})
+
 
 
 
@@ -151,6 +140,8 @@ let ArrayColor;
 let Arraydatetask;
 let ArrayMessage;
 let ArrayDoneTasks;
+
+
   
 if (!localStorage.getItem('arrayname')) {
    ArrayName=[];
@@ -225,14 +216,14 @@ else{
 
 
 localStorage.setItem('colortask' , ' #D7F0FF')
-let colorBtn ='medium';
+// let colorBtn ='medium';
 hightBtn.addEventListener('click',()=>{
    
     resetButtonsColor()
    
     hightBtn.style.backgroundColor='#FACBBA'
     hightBtn.style.color='black'
-    colorBtn='hight'
+   //  colorBtn='hight'
     localStorage.setItem('colortask','#FACBBA')
 })
 mediumBtn.addEventListener('click',()=>{
@@ -241,7 +232,7 @@ mediumBtn.addEventListener('click',()=>{
 
     mediumBtn.style.backgroundColor='#D7F0FF'
     mediumBtn.style.color='black'
-    colorBtn='medium'
+   //  colorBtn='medium'
     localStorage.setItem('colortask','#D7F0FF')
 
 
@@ -252,19 +243,19 @@ lowBtn.addEventListener('click',()=>{
     
     lowBtn.style.backgroundColor='#FAD9FF'
     lowBtn.style.color='black'
-    colorBtn='Low'
+   //  colorBtn='Low'
     localStorage.setItem('colortask','#FAD9FF')
 
 })
 
 
 
+let savedStatus = JSON.parse(localStorage.getItem("doneTasks")) || {};
 
    
 createTaskBtn.addEventListener('click',createNewtask)
 function createNewtask() {
    
-
    // let idx = localStorage.getItem('idx');
    id = new Date();
    let name = nameinput.value;
@@ -273,7 +264,10 @@ function createNewtask() {
    let color =localStorage.getItem('colortask');
    let startTime =satarttimeinput.value;
    let endTime = endtimeinput.value;
-   
+   resetButtonsColor();
+   localStorage.setItem('colortask' , ' #D7F0FF');
+   mediumBtn.style.backgroundColor= '#D7F0FF';
+   mediumBtn.style.color='black';
    
    createTaskpage.style.display='none';
    homepage.style.display='block';
@@ -286,7 +280,6 @@ function createNewtask() {
 
 }
 
-  let savedStatus = JSON.parse(localStorage.getItem("doneTasks")) || {};
 
 function createElement(name , datetask , color , message , startTime , endTime ,id) {
     let element = document.createElement('li')
@@ -661,3 +654,18 @@ function Percentagecalculate(count , allTasks) {
     console.log(allTasks);
     console.log(count);
 }
+
+addtaskBtn.addEventListener('click',()=>{
+    homepage.style.display='none';
+    createTaskpage.style.display='block';
+    createTaskpage.style.display='block';
+    CreateEditeButtons.style.display='none'
+    createTaskBtn.style.display='block';
+    nameinput.value='';
+    messageinput.value='';
+    startTime.value='';
+    endTime.valueupdate='';
+    resetButtonsColor();
+  
+   
+})
