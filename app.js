@@ -272,7 +272,7 @@ function createNewtask() {
 
    let li = createElement(name , datetask , color , message  , startTime , endTime ,id);
 
-   placeelement(datetask , li);
+   placeelement(name , datetask , color , message  , startTime , endTime ,id, li);
    taskCount();
    saveElement(name , datetask , color , message, startTime , endTime ,id);
 
@@ -372,7 +372,6 @@ function createElement(name , datetask , color , message , startTime , endTime ,
        homepage.style.display='block';
        createTaskpage.style.display='none';
        deletTask(name , datetask , color , message , startTime , endTime ,id);
-       console.log('f');
        
        taskCount();
     })
@@ -498,7 +497,7 @@ function deletTask(name , datetask , color , message , startTime , endTime ,id) 
    savedStatus = JSON.parse(localStorage.getItem("doneTasks")) || {};
    delete savedStatus[id];
    localStorage.setItem("doneTasks", JSON.stringify(savedStatus));
-  
+   taskCount();
    
 
    
@@ -511,7 +510,7 @@ window.addEventListener('load',loadpage)
 
          let li =  createElement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i] , ArrayStartTime[i],ArrayEndTime[i] , ArrayId[i])
 
-         placeelement(Arraydatetask[i] , li)
+         placeelement(ArrayName[i] , Arraydatetask[i] , ArrayColor[i] , ArrayMessage[i] , ArrayStartTime[i],ArrayEndTime[i] , ArrayId[i] , li)
          
          numberTask.innerHTML = tasklist[0].childElementCount
          
@@ -522,25 +521,33 @@ window.addEventListener('load',loadpage)
       
       }
    
-function placeelement(date , li) {
+function placeelement(name , datetask , color , message , startTime , endTime ,id , li) {
          
           let today = new Date();
           let tomorrow =new Date(today);
+          let yesterday = new Date();
           tomorrow.setDate(tomorrow.getDate()+1);
+          yesterday.setDate(yesterday.getDate()-1);
          
-         if (date == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
+         if (datetask == ` ${ String(new Date().getDate()).padStart(2 , '0')} ${days[new Date().getDay()]} `) {
             tasklist[0].appendChild(li);
             numberTask.innerHTML=tasklist[0].childElementCount
             localStorage.setItem('todaysTaskscounts',tasklist[0].childElementCount)
                // return;
             }
       
-         else if (date == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
-         
+         else if (datetask == ` ${ String(tomorrow.getDate()).padStart(2 , '0')} ${days[tomorrow.getDay()]} `) {
             tasklist[1].appendChild(li)
             localStorage.setItem('tommorowTaskscount',tasklist[1].childElementCount)
 
             // return;
+         }
+         else if(datetask == ` ${ String(yesterday.getDate()).padStart(2 , '0')} ${days[yesterday.getDay()]} `){
+            if (ArrayId.includes[id]) {
+               deletTask(name , datetask , color , message , startTime , endTime ,id);
+               todaytaskCount(li);
+            }
+
          }
          else{
             tasklist[2].appendChild(li)
@@ -605,10 +612,6 @@ searchinout.addEventListener('keyup',(event)=>{
    
 
 }) 
-
-   let count = 0;
-
-
 
 function taskCount() {
    count = 0;
