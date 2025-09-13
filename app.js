@@ -91,8 +91,16 @@ const stateinfo = document.querySelector('.stateinfo');
 const presentbar = document.querySelector('.present-bar')
 
 addtaskBtn.addEventListener('click',()=>{
-   homepage.style.display='none';
-   createTaskpage.style.display='block'
+    homepage.style.display='none';
+    createTaskpage.style.display='block';
+    createTaskpage.style.display='block';
+    CreateEditeButtons.style.display='none'
+    createTaskBtn.style.display='block';
+    nameinput.value='';
+    messageinput.value='';
+    startTime.value='';
+    endTime.value='';
+   
 })
 
 
@@ -372,8 +380,6 @@ function createElement(name , datetask , color , message , startTime , endTime ,
        homepage.style.display='block';
        createTaskpage.style.display='none';
        deletTask(name , datetask , color , message , startTime , endTime ,id);
-       
-       taskCount();
     })
    //  editTask
    EditTaskBtn.addEventListener('click',()=>{

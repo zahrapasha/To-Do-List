@@ -104,6 +104,10 @@ body{
 .todays-task{
     margin-top: 30px;
 }
+.tasklist{
+    max-height: 150px;
+    overflow-y: auto;
+}
  .tasklist li{
     background-color: #1F1F1F;
     display: flex;
