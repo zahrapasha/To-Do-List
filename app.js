@@ -660,8 +660,8 @@ addtaskBtn.addEventListener('click',()=>{
     createTaskBtn.style.display='block';
     nameinput.value='';
     messageinput.value='';
-    startTime.value='';
-    endTime.valueupdate='';
+    satarttimeinput.value='';
+    endtimeinput.valueupdate='';
     resetButtonsColor();
   
    
