@@ -214,7 +214,7 @@ li .info-task .task-history{
     
 }
 .header{
-    margin-top: 20px;
+    margin-top: 10px;
     position: relative;
     padding: 10px;
 
@@ -352,6 +352,10 @@ input::placeholder , textarea::placeholder{
 .section-priorityTask{
     margin-top: 30px;
 }
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
 .buttons button{
     width: 32%;
     height: 40px;
@@ -424,4 +428,8 @@ input::placeholder , textarea::placeholder{
     color: #BA83DE;
     cursor: pointer;
     opacity: 80%;
+}
+.heigh{
+    max-height: 800px;
+    overflow-y: auto;
 }

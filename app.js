@@ -124,6 +124,8 @@ const satarttimeinput = document.getElementById('satarttime');
 const endtimeinput = document.getElementById('endtime');
 const numberTask = document.getElementById('number-Task');
 const searchinout = document.getElementById('search');
+const backhomepage = document.querySelector('.back-home-page');
+const seeAlltasks = document.querySelectorAll('.seeAll_task');
 
 const tasklist =document.querySelectorAll('.tasklist');
 const CompletedtasksInfo = document.querySelector('.Completed-tasks-Info span');
@@ -661,8 +663,19 @@ addtaskBtn.addEventListener('click',()=>{
     nameinput.value='';
     messageinput.value='';
     satarttimeinput.value='';
-    endtimeinput.valueupdate='';
+    endtimeinput.value='';
     resetButtonsColor();
   
    
 })
+backhomepage.addEventListener('click',()=>{
+   homepage.style.display='block';
+   createTaskpage.style.display='none';
+   console.log('f');
+   
+})
+for (let i = 0; i <seeAlltasks.length; i++) {
+   seeAlltasks[i].addEventListener('click',()=>{
+      tasklist[i].classList.toggle('heigh')
+   })
+}
